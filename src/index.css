@@ -1,0 +1,183 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ivory: #EEE4D2;
+  --ivory-2: #F6EFE2;
+  --walnut: #2C2016;
+  --walnut-soft: #4A3826;
+  --mustard: #C1841A;
+  --mustard-deep: #9C6812;
+  --sesame: #171310;
+  --caution: #9C3D24;
+  --good: #4C6B3A;
+
+  /* semantic tokens (light) */
+  --bg: var(--ivory);
+  --panel: var(--ivory-2);
+  --card-bg: #FBF7EE;
+  --text: var(--walnut);
+  --text-soft: var(--walnut-soft);
+  --accent: var(--mustard);
+  --accent-deep: var(--mustard-deep);
+  --line: rgba(44, 32, 22, 0.12);
+  --line-strong: rgba(44, 32, 22, 0.24);
+
+  color-scheme: light;
+}
+
+/* Dark scheme: follows the OS unless <html data-theme> forces one. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --bg: #1B140D;
+    --panel: #201810;
+    --card-bg: #241C13;
+    --text: #F1E7D6;
+    --text-soft: #CFC1AA;
+    --accent: #E0A83B;
+    --accent-deep: #C1841A;
+    --line: rgba(241, 231, 214, 0.12);
+    --line-strong: rgba(241, 231, 214, 0.26);
+    color-scheme: dark;
+  }
+}
+:root[data-theme='dark'] {
+  --bg: #1B140D;
+  --panel: #201810;
+  --card-bg: #241C13;
+  --text: #F1E7D6;
+  --text-soft: #CFC1AA;
+  --accent: #E0A83B;
+  --accent-deep: #C1841A;
+  --line: rgba(241, 231, 214, 0.12);
+  --line-strong: rgba(241, 231, 214, 0.26);
+  color-scheme: dark;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+  body {
+    @apply font-body antialiased;
+    background-color: var(--bg);
+    color: var(--text);
+    font-size: 17px;
+    line-height: 1.6;
+  }
+  h1, h2, h3, h4 {
+    @apply font-heading font-semibold tracking-heading;
+    font-variation-settings: 'opsz' 144; /* display optical size */
+    line-height: 1.05;
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  ::selection {
+    background: var(--accent);
+    color: var(--sesame);
+  }
+  :focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+}
+
+@layer components {
+  .container-site {
+    @apply mx-auto w-full max-w-site px-5 sm:px-8;
+  }
+  .section {
+    @apply py-16 sm:py-24;
+  }
+  .eyebrow {
+    @apply font-body text-xs font-semibold uppercase tracking-[0.18em];
+    color: var(--accent-deep);
+  }
+  .h-display {
+    @apply text-[2.4rem] leading-[1.02] sm:text-6xl lg:text-[4.5rem];
+  }
+  .h-section {
+    @apply text-[2rem] sm:text-4xl lg:text-5xl;
+  }
+  .lead {
+    @apply text-lg sm:text-xl;
+    color: var(--text-soft);
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold uppercase tracking-[0.12em] transition-transform duration-200 will-change-transform;
+  }
+  .btn:hover {
+    transform: translateY(-1px);
+  }
+  .btn:active {
+    transform: translateY(0);
+  }
+  .btn-primary {
+    background: var(--sesame);
+    color: #F1E7D6;
+  }
+  .btn-primary:hover {
+    background: #000;
+  }
+  .btn-primary {
+    @apply dark:bg-dk-accent dark:text-sesame dark:hover:bg-dk-text;
+  }
+  .btn-outline {
+    color: var(--text);
+    box-shadow: inset 0 0 0 1.5px var(--line-strong);
+  }
+  .btn-outline:hover {
+    box-shadow: inset 0 0 0 1.5px var(--accent);
+    color: var(--accent-deep);
+  }
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--line);
+    @apply rounded-2xl;
+  }
+  .panel {
+    background: var(--panel);
+  }
+  .divider {
+    border-color: var(--line);
+  }
+  .text-soft {
+    color: var(--text-soft);
+  }
+  .text-accent {
+    color: var(--accent-deep);
+  }
+  .grain {
+    position: relative;
+  }
+  .grain::after {
+    content: '';
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    opacity: 0.06;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .grain::after {
+    @apply dark:mix-blend-screen dark:opacity-[0.045];
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
