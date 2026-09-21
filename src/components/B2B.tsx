@@ -11,7 +11,7 @@ const BULLETS = [
 
 export function B2B() {
   return (
-    <section id="b2b" className="section panel scroll-mt-16 border-y divider">
+    <section id="b2b" className="section tone-warm scroll-mt-16 border-y divider">
       <div className="container-site grid gap-12 lg:grid-cols-2 lg:items-center">
         <Reveal>
           <SectionHeading
@@ -27,7 +27,7 @@ export function B2B() {
         <ul className="grid gap-4">
           {BULLETS.map((b, i) => (
             <Reveal as="li" key={b.title} delay={0.08 + i * 0.07} className="card flex gap-4 p-5 sm:p-6">
-              <span className="mt-1 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-mustard/15 text-accent">
+              <span className="mt-1 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-moss/15 text-secondary">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
                   <path d="M5 12l5 5L20 7" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>

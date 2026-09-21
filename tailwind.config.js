@@ -21,6 +21,10 @@ export default {
         sesame: '#171310',
         caution: '#9C3D24',
         good: '#4C6B3A',
+        // secondary: deep olive / moss for positive indicators, icons and tags
+        moss: { DEFAULT: '#4C6B3A', deep: '#3A5230', soft: '#7E9A6A', pale: '#DCE3CC' },
+        // tertiary neutral: warm cream for text-on-dark and card surfaces
+        cream: { DEFAULT: '#F6EFE2', light: '#FBF7EE', deep: '#E9DEC8' },
         // dark-mode equivalents
         'dk-bg': '#1B140D',
         'dk-text': '#F1E7D6',

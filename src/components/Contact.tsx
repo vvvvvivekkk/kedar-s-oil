@@ -58,7 +58,7 @@ export function Contact() {
                 href={WHATSAPP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-sm font-semibold text-accent"
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-secondary"
               >
                 <WhatsAppIcon />
                 Open in WhatsApp

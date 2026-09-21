@@ -19,7 +19,7 @@ const POINTS = [
 
 export function VirginOilExplainer() {
   return (
-    <section id="virgin" className="section panel scroll-mt-16 border-y divider">
+    <section id="virgin" className="section tone-warm scroll-mt-16 border-y divider">
       <div className="container-site grid gap-12 lg:grid-cols-[1fr_0.8fr] lg:items-center">
         <div>
           <Reveal>
@@ -46,7 +46,7 @@ export function VirginOilExplainer() {
           <ul className="mt-10 grid gap-4 sm:grid-cols-3">
             {POINTS.map((p, i) => (
               <Reveal as="li" key={p.title} delay={0.1 + i * 0.07} className="card p-5">
-                <h3 className="font-heading text-2xl font-semibold tracking-heading text-accent">{p.title}</h3>
+                <h3 className="font-heading text-2xl font-semibold tracking-heading text-secondary">{p.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-soft">{p.body}</p>
               </Reveal>
             ))}
@@ -55,7 +55,7 @@ export function VirginOilExplainer() {
 
         <Reveal delay={0.15} className="mx-auto w-full max-w-xs lg:max-w-sm">
           <figure className="card relative overflow-hidden p-8">
-            <div aria-hidden="true" className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-mustard/10 to-transparent" />
+            <div aria-hidden="true" className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-moss/10 to-transparent" />
             <BottleStatic
               liquid="#F3EBDC"
               liquidDeep="#DDD0B8"

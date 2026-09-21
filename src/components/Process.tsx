@@ -21,7 +21,7 @@ const STEPS = [
 
 export function Process() {
   return (
-    <section id="process" className="section scroll-mt-16">
+    <section id="process" className="section tone-deep scroll-mt-16 border-t divider">
       <div className="container-site">
         <Reveal>
           <SectionHeading eyebrow="Process" title="Three steps. No shortcuts." align="center" />
@@ -30,7 +30,7 @@ export function Process() {
           {STEPS.map((s, i) => (
             <Reveal as="li" key={s.n} delay={i * 0.1} className="relative">
               <div className="flex items-baseline gap-4 md:block">
-                <span className="font-heading text-6xl font-semibold tracking-heading text-mustard/40 md:text-7xl" aria-hidden="true">
+                <span className="font-heading text-6xl font-semibold tracking-heading text-secondary opacity-50 md:text-7xl" aria-hidden="true">
                   {s.n}
                 </span>
                 <span className="sr-only">Step {i + 1}:</span>

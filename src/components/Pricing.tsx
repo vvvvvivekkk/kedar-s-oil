@@ -4,17 +4,17 @@ import { PHONE_DISPLAY, PHONE_TEL, WHATSAPP_URL } from '../lib/site'
 
 export function Pricing() {
   return (
-    <section id="pricing" className="scroll-mt-16 pb-16 sm:pb-24">
+    <section id="pricing" className="tone-deep scroll-mt-16 pb-16 sm:pb-24">
       <div className="container-site">
         <Reveal>
           <div className="grain relative overflow-hidden rounded-3xl bg-sesame px-6 py-12 text-[#F1E7D6] sm:px-12 sm:py-16">
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-mustard/30 blur-3xl"
+              className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-gradient-to-br from-mustard/40 to-moss/30 blur-3xl"
             />
             <div className="relative grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
               <div>
-                <p className="eyebrow !text-dk-accent">Pricing</p>
+                <p className="eyebrow !text-moss-soft">Pricing</p>
                 <h2 className="h-section mt-4">Current price list is being finalised.</h2>
                 <p className="mt-5 max-w-xl text-lg text-[#F1E7D6]/80">
                   Message us on WhatsApp for today’s rate per litre on any oil, retail or bulk. Rates move with the

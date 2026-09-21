@@ -73,7 +73,7 @@ export function UsesGrid() {
         <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {USES.map((u, i) => (
             <Reveal as="li" key={u.title} delay={i * 0.07} className="card group p-6">
-              <div className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-mustard/15 text-accent transition-colors group-hover:bg-mustard/25">
+              <div className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-moss/15 text-secondary transition-colors group-hover:bg-moss/25">
                 {u.icon}
               </div>
               <h3 className="mt-5 font-heading text-2xl font-semibold tracking-heading">{u.title}</h3>

@@ -4,6 +4,8 @@
  */
 export function isLowEndDevice(): boolean {
   if (typeof navigator === 'undefined') return true
+  // `?nogl` forces the static hero — handy for debugging and for screenshots.
+  if (new URLSearchParams(window.location.search).has('nogl')) return true
   const cores = navigator.hardwareConcurrency ?? 0
   if (cores > 0 && cores < 4) return true
 

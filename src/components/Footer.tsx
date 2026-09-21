@@ -14,7 +14,7 @@ export function Footer() {
             </p>
           </div>
           <nav aria-label="Footer">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-dk-accent">Explore</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-moss-soft">Explore</p>
             <ul className="mt-4 grid gap-2 text-sm">
               {NAV.map((n) => (
                 <li key={n.href}>
@@ -26,7 +26,7 @@ export function Footer() {
             </ul>
           </nav>
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-dk-accent">Reach us</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-moss-soft">Reach us</p>
             <ul className="mt-4 grid gap-2 text-sm">
               <li>
                 <a href={PHONE_TEL} className="opacity-80 hover:opacity-100">

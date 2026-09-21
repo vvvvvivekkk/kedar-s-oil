@@ -49,7 +49,7 @@ const PRODUCTS: Product[] = [
 
 export function Products() {
   return (
-    <section id="products" className="section panel scroll-mt-16 border-y divider">
+    <section id="products" className="section tone-cool scroll-mt-16 border-y divider">
       <div className="container-site">
         <Reveal className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <SectionHeading eyebrow="Products" title="Four oils. One method." />
@@ -62,7 +62,7 @@ export function Products() {
         <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {PRODUCTS.map((p, i) => (
             <Reveal as="li" key={p.name} delay={i * 0.07} className="card group flex flex-col overflow-hidden">
-              <div className="relative flex h-56 items-end justify-center overflow-hidden bg-gradient-to-b from-mustard/10 to-transparent pt-6">
+              <div className="relative flex h-56 items-end justify-center overflow-hidden bg-gradient-to-b from-mustard/[0.08] to-transparent pt-6">
                 <BottleStatic
                   liquid={p.liquid}
                   liquidDeep={p.liquidDeep}

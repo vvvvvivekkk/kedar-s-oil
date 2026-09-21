@@ -32,7 +32,7 @@ function Check() {
 
 function Cell({ text, win }: { text: string; win: boolean }) {
   return (
-    <span className={`inline-flex items-start gap-2 ${win ? 'font-semibold text-good dark:text-[#9DBB86]' : ''}`}>
+    <span className={`inline-flex items-start gap-2 ${win ? 'font-semibold text-secondary' : ''}`}>
       {win && (
         <span className="mt-[0.3em]">
           <Check />
@@ -46,7 +46,7 @@ function Cell({ text, win }: { text: string; win: boolean }) {
 
 export function ColdPressVsRefined() {
   return (
-    <section id="why-cold-pressed" className="section scroll-mt-16">
+    <section id="why-cold-pressed" className="section scroll-mt-16 pt-10 sm:pt-16">
       <div className="container-site">
         <Reveal>
           <SectionHeading
@@ -96,7 +96,7 @@ export function ColdPressVsRefined() {
               <h3 className="font-heading text-xl font-semibold tracking-heading">{r.metric}</h3>
               <dl className="mt-4 grid gap-3">
                 <div>
-                  <dt className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">Cold-pressed (Kedar’s)</dt>
+                  <dt className="text-xs font-semibold uppercase tracking-[0.16em] text-secondary">Cold-pressed (Kedar’s)</dt>
                   <dd className="mt-1">
                     <Cell text={r.cold} win={r.winner === 'cold'} />
                   </dd>

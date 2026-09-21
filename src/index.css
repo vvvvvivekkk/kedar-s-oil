@@ -12,17 +12,30 @@
   --sesame: #171310;
   --caution: #9C3D24;
   --good: #4C6B3A;
+  --moss: #4C6B3A;
+  --moss-deep: #3A5230;
+  --cream: #F6EFE2;
 
   /* semantic tokens (light) */
   --bg: var(--ivory);
+  --bg-warm: #F1E3C9;   /* slightly warmer section tone */
+  --bg-cool: #E7DDCC;   /* slightly cooler / deeper section tone */
   --panel: var(--ivory-2);
   --card-bg: #FBF7EE;
   --text: var(--walnut);
   --text-soft: var(--walnut-soft);
   --accent: var(--mustard);
   --accent-deep: var(--mustard-deep);
+  --secondary: var(--moss);
+  --secondary-soft: #5F8049;
   --line: rgba(44, 32, 22, 0.12);
   --line-strong: rgba(44, 32, 22, 0.24);
+  --glass: rgba(251, 247, 238, 0.62);
+  --glass-line: rgba(255, 255, 255, 0.55);
+  /* section gradients */
+  --grad-hero: linear-gradient(160deg, #F3E6CC 0%, var(--ivory) 45%, #E6E2CF 100%);
+  --grad-warm: linear-gradient(180deg, var(--bg) 0%, var(--bg-warm) 100%);
+  --grad-deep: linear-gradient(180deg, var(--bg-cool) 0%, #DCD0BB 100%);
 
   color-scheme: light;
 }
@@ -31,27 +44,45 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
     --bg: #1B140D;
+    --bg-warm: #221810;
+    --bg-cool: #14100C;
     --panel: #201810;
     --card-bg: #241C13;
     --text: #F1E7D6;
     --text-soft: #CFC1AA;
     --accent: #E0A83B;
     --accent-deep: #C1841A;
+    --secondary: #7E9A6A;
+    --secondary-soft: #9DBB86;
     --line: rgba(241, 231, 214, 0.12);
     --line-strong: rgba(241, 231, 214, 0.26);
+    --glass: rgba(36, 28, 19, 0.55);
+    --glass-line: rgba(241, 231, 214, 0.14);
+    --grad-hero: linear-gradient(160deg, #2A1B0E 0%, #1B140D 45%, #171A12 100%);
+    --grad-warm: linear-gradient(180deg, var(--bg) 0%, var(--bg-warm) 100%);
+    --grad-deep: linear-gradient(180deg, var(--bg-cool) 0%, #100D0A 100%);
     color-scheme: dark;
   }
 }
 :root[data-theme='dark'] {
   --bg: #1B140D;
+  --bg-warm: #221810;
+  --bg-cool: #14100C;
   --panel: #201810;
   --card-bg: #241C13;
   --text: #F1E7D6;
   --text-soft: #CFC1AA;
   --accent: #E0A83B;
   --accent-deep: #C1841A;
+  --secondary: #7E9A6A;
+  --secondary-soft: #9DBB86;
   --line: rgba(241, 231, 214, 0.12);
   --line-strong: rgba(241, 231, 214, 0.26);
+  --glass: rgba(36, 28, 19, 0.55);
+  --glass-line: rgba(241, 231, 214, 0.14);
+  --grad-hero: linear-gradient(160deg, #2A1B0E 0%, #1B140D 45%, #171A12 100%);
+  --grad-warm: linear-gradient(180deg, var(--bg) 0%, var(--bg-warm) 100%);
+  --grad-deep: linear-gradient(180deg, var(--bg-cool) 0%, #100D0A 100%);
   color-scheme: dark;
 }
 
@@ -101,7 +132,57 @@
   }
   .eyebrow {
     @apply font-body text-xs font-semibold uppercase tracking-[0.18em];
+    color: var(--secondary);
+  }
+  .eyebrow-accent {
     color: var(--accent-deep);
+  }
+  .text-secondary {
+    color: var(--secondary);
+  }
+  .btn-secondary {
+    background: var(--moss);
+    color: #F6EFE2;
+  }
+  .btn-secondary:hover {
+    background: var(--moss-deep);
+  }
+  /* section tones */
+  .tone-warm {
+    background: var(--grad-warm);
+  }
+  .tone-cool {
+    background: var(--bg-cool);
+  }
+  .tone-deep {
+    background: var(--grad-deep);
+  }
+  /* frosted panel for content sitting on the 3D backdrop */
+  .glass {
+    background: var(--glass);
+    border: 1px solid var(--glass-line);
+    -webkit-backdrop-filter: blur(18px) saturate(1.2);
+    backdrop-filter: blur(18px) saturate(1.2);
+    box-shadow: 0 10px 40px -20px rgba(23, 19, 16, 0.35);
+  }
+  /* CSS-only ambient gradient: hero fallback before/without the WebGL backdrop */
+  .ambient {
+    background: var(--grad-hero);
+  }
+  .ambient::before {
+    content: '';
+    position: absolute;
+    inset: -20%;
+    background:
+      radial-gradient(40% 50% at 70% 40%, rgba(193, 132, 26, 0.28), transparent 70%),
+      radial-gradient(35% 45% at 20% 80%, rgba(76, 107, 58, 0.22), transparent 70%),
+      radial-gradient(30% 40% at 85% 90%, rgba(246, 239, 226, 0.25), transparent 70%);
+    filter: blur(40px);
+    animation: drift 24s ease-in-out infinite alternate;
+  }
+  @keyframes drift {
+    from { transform: translate3d(-3%, -2%, 0) rotate(0deg); }
+    to { transform: translate3d(3%, 4%, 0) rotate(6deg); }
   }
   .h-display {
     @apply text-[2.4rem] leading-[1.02] sm:text-6xl lg:text-[4.5rem];

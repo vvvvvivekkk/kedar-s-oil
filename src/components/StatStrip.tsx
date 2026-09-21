@@ -6,15 +6,17 @@ const STATS = [
   { value: '90%+', label: 'Of natural Vitamin E retained vs refined oil' },
 ]
 
+/** Frosted-glass stat cards that overlap the bottom edge of the hero's 3D backdrop. */
 export function StatStrip() {
   return (
-    <section aria-label="Key facts" className="border-y divider panel">
+    <section aria-label="Key facts" className="relative z-20 -mt-20 sm:-mt-24">
       <div className="container-site">
-        <ul className="grid divide-y divider sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+        <ul className="grid gap-4 sm:grid-cols-3">
           {STATS.map((s, i) => (
-            <Reveal as="li" key={s.value} delay={i * 0.08} className="py-8 sm:px-8 sm:py-10 first:sm:pl-0 last:sm:pr-0">
-              <p className="font-heading text-5xl font-semibold tracking-heading text-accent sm:text-6xl">{s.value}</p>
-              <p className="mt-3 max-w-xs text-soft">{s.label}</p>
+            <Reveal as="li" key={s.value} delay={i * 0.08} className="glass rounded-2xl p-6 sm:p-7">
+              <p className="font-heading text-5xl font-semibold tracking-heading sm:text-[3.4rem]">{s.value}</p>
+              <span aria-hidden="true" className="mt-4 block h-1 w-10 rounded-full bg-moss" />
+              <p className="mt-4 max-w-xs text-sm leading-relaxed text-soft sm:text-base">{s.label}</p>
             </Reveal>
           ))}
         </ul>
