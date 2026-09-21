@@ -1,6 +1,6 @@
 import { Reveal } from './Reveal'
 import { SectionHeading } from './SectionHeading'
-import { BottleStatic } from './BottleStatic'
+import { BottleCard } from '../three/BottleCard'
 
 const POINTS = [
   {
@@ -56,11 +56,13 @@ export function VirginOilExplainer() {
         <Reveal delay={0.15} className="mx-auto w-full max-w-xs lg:max-w-sm">
           <figure className="card relative overflow-hidden p-8">
             <div aria-hidden="true" className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-moss/10 to-transparent" />
-            <BottleStatic
-              liquid="#F3EBDC"
+            <BottleCard
+              liquidColor="#F3EBDC"
               liquidDeep="#DDD0B8"
-              className="relative mx-auto h-72 w-auto"
-              title="A bottle of Kedar’s virgin coconut oil — clear, pale liquid"
+              subtitle="Virgin Coconut"
+              caption="From fresh coconut"
+              accent="#4C6B3A"
+              className="relative mx-auto h-72 w-full"
             />
             <figcaption className="relative mt-4 text-center text-sm text-soft">
               Virgin coconut oil — pressed from fresh coconut, never copra.

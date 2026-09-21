@@ -1,6 +1,6 @@
 import { Reveal } from './Reveal'
 import { SectionHeading } from './SectionHeading'
-import { BottleStatic } from './BottleStatic'
+import { BottleCard } from '../three/BottleCard'
 import { WhatsAppIcon } from './Header'
 import { WHATSAPP_URL } from '../lib/site'
 
@@ -10,6 +10,8 @@ type Product = {
   description: string
   liquid: string
   liquidDeep: string
+  /** Label stripe/subtitle colour — distinct per oil so the four cards read as different products, not one recoloured icon. */
+  accent: string
 }
 
 const PRODUCTS: Product[] = [
@@ -20,6 +22,7 @@ const PRODUCTS: Product[] = [
       'Wood-pressed from whole mustard seed under 40°C — sharp, pungent and full-flavoured, with a smoke point high enough for deep frying.',
     liquid: '#C9921C',
     liquidDeep: '#8F5E12',
+    accent: '#9C6812',
   },
   {
     name: 'Cold-Pressed Coconut Oil',
@@ -28,6 +31,7 @@ const PRODUCTS: Product[] = [
       'Pressed from sun-dried copra without solvents, bleach or deodorising — clean, mild, and the everyday choice for South Indian cooking.',
     liquid: '#F1E4C9',
     liquidDeep: '#D9C7A3',
+    accent: '#7E9A6A',
   },
   {
     name: 'Virgin Coconut Oil',
@@ -36,6 +40,7 @@ const PRODUCTS: Product[] = [
       'Pressed from fresh coconut meat in a single step — no drying, no storage gap, no heat — so it keeps the highest polyphenols of any coconut oil.',
     liquid: '#F6F0E4',
     liquidDeep: '#E3D8C2',
+    accent: '#4C6B3A',
   },
   {
     name: 'Sesame (Til) Oil',
@@ -44,6 +49,7 @@ const PRODUCTS: Product[] = [
       'Slow-pressed white sesame with its natural nuttiness intact — for tempering, pickles, and the abhyanga massage tradition.',
     liquid: '#B8761E',
     liquidDeep: '#7D4E12',
+    accent: '#7D4E12',
   },
 ]
 
@@ -63,11 +69,12 @@ export function Products() {
           {PRODUCTS.map((p, i) => (
             <Reveal as="li" key={p.name} delay={i * 0.07} className="card group flex flex-col overflow-hidden">
               <div className="relative flex h-56 items-end justify-center overflow-hidden bg-gradient-to-b from-mustard/[0.08] to-transparent pt-6">
-                <BottleStatic
-                  liquid={p.liquid}
+                <BottleCard
+                  liquidColor={p.liquid}
                   liquidDeep={p.liquidDeep}
-                  decorative
-                  className="h-full w-auto translate-y-2 transition-transform duration-500 group-hover:-translate-y-0"
+                  subtitle={p.tag}
+                  accent={p.accent}
+                  className="h-full w-full translate-y-2 transition-transform duration-500 group-hover:-translate-y-0"
                 />
               </div>
               <div className="flex flex-1 flex-col p-6">

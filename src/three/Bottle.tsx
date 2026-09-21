@@ -31,8 +31,17 @@ const LIQUID_PROFILE: [number, number][] = [
   [0, 1.22],
 ]
 
+type LabelText = {
+  /** Line under the wordmark, spaced like a badge — e.g. product tag or "COLD-PRESSED". */
+  subtitle: string
+  /** Small line at the bottom — e.g. origin or a one-word product cue. */
+  caption: string
+  /** Accent used for the stripes + subtitle. Defaults to mustard. */
+  accent: string
+}
+
 /** Paints the label artwork onto a 2D canvas. */
-function paintLabel(c: HTMLCanvasElement) {
+function paintLabel(c: HTMLCanvasElement, label: LabelText) {
   const W = c.width
   const H = c.height
   const ctx = c.getContext('2d')
@@ -45,7 +54,7 @@ function paintLabel(c: HTMLCanvasElement) {
     ctx.fillRect(Math.random() * W, Math.random() * H, 2, 2)
   }
   // stripes
-  ctx.fillStyle = '#C1841A'
+  ctx.fillStyle = label.accent
   ctx.fillRect(0, 34, W, 8)
   ctx.fillRect(0, H - 42, W, 8)
   // wordmark
@@ -55,12 +64,14 @@ function paintLabel(c: HTMLCanvasElement) {
   ctx.fillStyle = '#2C2016'
   ctx.font = '600 150px "Fraunces Variable", "Fraunces", Georgia, serif'
   ctx.fillText('Kedar’s', cx, H * 0.46)
-  ctx.fillStyle = '#9C6812'
-  ctx.font = '600 44px "Karla", system-ui, sans-serif'
-  ctx.fillText('C O L D - P R E S S E D', cx, H * 0.72)
+  ctx.fillStyle = label.accent
+  ctx.font = '600 42px "Karla", system-ui, sans-serif'
+  ctx.letterSpacing = '3px'
+  ctx.fillText(label.subtitle.toUpperCase(), cx, H * 0.72)
+  ctx.letterSpacing = '0px'
   ctx.fillStyle = '#4A3826'
   ctx.font = '400 30px "Karla", system-ui, sans-serif'
-  ctx.fillText('KAPRA · SECUNDERABAD', cx, H * 0.86)
+  ctx.fillText(label.caption.toUpperCase(), cx, H * 0.86)
 }
 
 /**
@@ -68,12 +79,12 @@ function paintLabel(c: HTMLCanvasElement) {
  * synchronously (so the material compiles with a map from the start) and
  * repainted once the web fonts are ready.
  */
-function useLabelTexture() {
+function useLabelTexture(label: LabelText) {
   const { tex, canvas } = useMemo(() => {
     const canvas = document.createElement('canvas')
     canvas.width = 2816 // ≈ band circumference / height, so the artwork is not stretched
     canvas.height = 512
-    paintLabel(canvas)
+    paintLabel(canvas, label)
     const tex = new THREE.CanvasTexture(canvas)
     tex.colorSpace = THREE.SRGBColorSpace
     tex.anisotropy = 8
@@ -81,20 +92,25 @@ function useLabelTexture() {
     // Cylinder u=0 faces +z (the camera); the wordmark is at texture u=0.5.
     tex.offset.x = 0.5
     return { tex, canvas }
-  }, [])
+    // Re-painted below on font-ready and whenever the label text/accent itself changes.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [label.subtitle, label.caption, label.accent])
 
   useEffect(() => {
     let cancelled = false
+    paintLabel(canvas, label)
+    tex.needsUpdate = true
     document.fonts?.ready.then(() => {
       if (cancelled) return
-      paintLabel(canvas)
+      paintLabel(canvas, label)
       tex.needsUpdate = true
     })
     return () => {
       cancelled = true
-      tex.dispose()
     }
-  }, [tex, canvas])
+  }, [tex, canvas, label])
+
+  useEffect(() => () => tex.dispose(), [tex])
 
   return tex
 }
@@ -108,22 +124,41 @@ function useLathe(profile: [number, number][], segments = 96) {
   }, [profile, segments])
 }
 
-export function Bottle() {
+type BottleProps = {
+  /** Liquid body colour. Defaults to the mustard hero bottle. */
+  liquidColor?: string
+  /** Used for the liquid's emissive glow — should read as a deeper shade of liquidColor. */
+  liquidDeep?: string
+  /** Label subtitle line (product tag). Defaults to "Cold-Pressed" for the flagship hero bottle. */
+  subtitle?: string
+  /** Label caption line. Defaults to the mill's location. */
+  caption?: string
+  /** Stripe/subtitle accent colour on the label. Defaults to mustard. */
+  accent?: string
+}
+
+export function Bottle({
+  liquidColor = '#C1841A',
+  liquidDeep = '#8a5210',
+  subtitle = 'Cold-Pressed',
+  caption = 'Kapra · Secunderabad',
+  accent = '#9C6812',
+}: BottleProps) {
   const glassGeo = useLathe(GLASS_PROFILE)
   const liquidGeo = useLathe(LIQUID_PROFILE)
-  const label = useLabelTexture()
+  const label = useLabelTexture({ subtitle, caption, accent })
 
   return (
     <group position={[0, -0.35, 0]}>
       {/* Liquid — rendered first so the glass transmission buffer sees it */}
       <mesh geometry={liquidGeo} renderOrder={0}>
         <meshPhysicalMaterial
-          color="#C1841A"
+          color={liquidColor}
           roughness={0.1}
           metalness={0.05}
           clearcoat={0.4}
           clearcoatRoughness={0.2}
-          emissive="#8a5210"
+          emissive={liquidDeep}
           emissiveIntensity={0.18}
         />
       </mesh>
